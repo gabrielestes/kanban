@@ -7,7 +7,6 @@ class CreateBulletins < ActiveRecord::Migration[5.0]
     create_table :bulletins do |t|
       t.integer :user_id
       t.string :title
-      t.integer :items
     end
   end
 
