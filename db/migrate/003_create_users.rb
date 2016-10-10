@@ -2,18 +2,17 @@ require 'active_record'
 require 'pg'
 
 # adds tasks table
-class CreateTasks < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.0]
   def up
-    create_table :tasks do |t|
+    create_table :users do |t|
       t.integer :user_id
-      t.string :title
-      t.string :status
-      t.integer :priority
+      t.string :name
+      t.string :position
     end
   end
 
   def down
-    drop_table :tasks
+    drop_table :users
   end
 end
 
