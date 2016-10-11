@@ -13,7 +13,7 @@ before do
   content_type :json
 end
 
-database_config = YAML::load(File.open('config/database.example.yml'))
+database_config = YAML::load(File.open('config/database.yml'))
 
 after do
   ActiveRecord::Base.connection.close
@@ -24,13 +24,13 @@ get '/api' do
 end
 
 # ALL TASKS
-get '/api/tasks/' do
+get '/api/tasks' do
   tasks = Task.all.order(priority: :DESC)
   tasks.to_json
 end
 
 # NEW TASK
-post '/api/tasks/' do
+post '/api/tasks' do
   user_id = params['user_id']
   title = params['title']
   status = params['status']
