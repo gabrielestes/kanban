@@ -1,16 +1,19 @@
 require 'sinatra'
 require 'active_record'
+require_relative 'models/bulletin'
 require_relative 'models/task'
+require_relative 'models/user'
+require 'yaml'
 require 'json'
 require 'pg'
 
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
-database_config = YAML::load(File.open('config/database.yml'))
-
 before do
   content_type :json
 end
+
+database_config = YAML::load(File.open('config/database.example.yml'))
 
 after do
   ActiveRecord::Base.connection.close
@@ -20,16 +23,13 @@ get '/api' do
   'Please enter your task'
 end
 
+# ALL TASKS
 get '/api/tasks/' do
-  # user_id = params['user_id']
-  # title = params['title']
-  # status = params['status']
-  # priority = params['priority']
   tasks = Task.all.order(priority: :DESC)
-
   tasks.to_json
 end
 
+# NEW TASK
 post '/api/tasks/' do
   user_id = params['user_id']
   title = params['title']
@@ -49,27 +49,51 @@ post '/api/tasks/' do
   end
 end
 
-put '/api/tasks' do
-  task = Task.get params[:id]
+# FIND AND UPDATE TASK
+put '/api/tasks/:id' do
+  task = Task.where(id: params['id']).first
   if task.update(
     user_id: user_id,
     title: title,
     status: status,
     priority: priority
   )
+    task.to_json
     status 200
   else
     status 500
   end
 end
 
-delete '/api/tasks' do
-  task = Task.get params[:id]
+# DELETE TASK
+delete '/api/tasks/:id' do
+  task = Task.where(id: params['id'])
   if task.destroy
     status 200
-    json "This task has been removed successfully."
+    json 'This task has been removed successfully.'
   else
     status 500
-    json "Task removal rejected."
+    json 'Task removal rejected.'
+  end
+end
+
+# ALL BULLETINS
+get '/api/bulletins' do
+  Bulletin.all.to_json(include: :tasks)
+end
+
+# ONE BULLETIN
+get '/api/bulletins/:id' do
+  Bulletin.where(id: params['id'])
+end
+
+# NEW BULLETIN
+get '/api/bulletins' do
+  bulletin = Bulletin.new(params)
+
+  if bulletin.save
+    bulletin.to_json
+  else
+    status 500
   end
 end

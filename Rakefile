@@ -4,6 +4,9 @@ require 'active_record'
 require 'pg'
 require 'yaml'
 require 'rake'
+require 'app'
+require 'sinatra'
+require 'sinatra/activerecord/rake'
 
 
 namespace :db do
