@@ -3,11 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"> -->
   </head>
-  <body>
-    <button id="new-task">New Task</button>
-    <button id="new-bulletin">New Bulletin</button>
+  <body class="col">
+    <div class="jumbotron text-center">
+      <h1>Gello Task-Basher</h1>
+    </div>
+    <div class="container">
+      <div class="row row-centered">
+        <div class="col-xs-4 col-centered">
+          <button id="new-task">New Task</button>
+          <p>
+            User ID
+          </p>
+          <input type="text" id="user-id"/>
+          <p>
+            Task Title
+          </p>
+          <input type="text" id="task-title"/>
+          <p>
+            Status
+          </p>
+          <input type="text" id="status"/>
+          <p>
+            Priority
+          </p>
+          <input type="text" id="priority"/>
+        </div>
+        <ul id="all-tasks" class="col-xs-4">
+
+        </ul>
+        <div class="col-xs-4 col-centered">
+          <button id="new-task">New Bulletin</button>
+        </div>
+      </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="index.js"
+    <script src="index.js"></script>
   </body>
 </html>

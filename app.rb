@@ -19,6 +19,10 @@ after do
   ActiveRecord::Base.connection.close
 end
 
+get '/' do
+  File.read(File.join('public', 'index.html'))
+end
+
 get '/api' do
   'Please enter your task'
 end
