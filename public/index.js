@@ -24,28 +24,27 @@ $('#new-task').click(function() {
   });
 })
 //
-function appendLines(){
-  $.ajax({
-          method: 'GET',
-          url: '/api/tasks',
-          data: {},
-          dataType: 'json'
-        }).done(function($tasks) {
-          console.log($tasks);
 
-          $tasks.forEach(function($task) {
-            console.log($task);
+$.ajax({
+        method: 'GET',
+        url: '/api/tasks',
+        data: {},
+        dataType: 'json'
+      }).done(function($tasks) {
+        console.log($tasks);
 
-            $('#all-tasks').append("<li class='list-group-item'>"
-              + $task.title + " " + $task.status + $task.priority + "<label class='checkbox-inline'><input type='checkbox' value='" + $task.id + "'></label>" + "</li>"
-            );
-          });
-        }).fail(function(xhr, text, error) {
-          console.error('failed to get tasks: ' + text + ', ' + error);
+        $tasks.forEach(function($task) {
+          console.log($task);
+
+          $('#all-tasks').append(
+            "<li class='list-group-item'>" + "<label class='checkbox-inline'><input type='checkbox' value='" + $task.id + "'></label>" + $task.title + " " + $task.status + $task.priority + "</li>"
+          );
         });
-}
+      }).fail(function(xhr, text, error) {
+        console.error('failed to get tasks: ' + text + ', ' + error);
+      });
 
-appendLines();
+// setInterval("appendLines()", 3000);
 
 $('#delete-task').on("click",function(){
   var checked = $(".checkbox-inline input[type=checkbox]:checked")
@@ -63,7 +62,9 @@ $('#delete-task').on("click",function(){
             })
   })
 });
-// 
+
+
+//
 // function updateTasks($tasks){
 //   $tasks.load('/api/tasks');
 //   console.log("updating")

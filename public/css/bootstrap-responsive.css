@@ -9,10 +9,56 @@
  */
 body {
   font-family: 'Orbitron', sans-serif;
+  background-color: rgb(10, 11, 6);
 }
 
 button {
   font-family: 'Orbitron', sans-serif;
+  transform: skew(-20deg);
+  margin-top: 10px;
+}
+
+#new-task {
+  margin-left: 50%;
+}
+
+button:hover {
+  transition: all 0.3s ease-in;
+	-webkit-stroke-width: 5.3px;
+  -webkit-stroke-color: #FFFFFF;
+  -webkit-fill-color: #FFFFFF;
+  text-shadow: 1px 0px 20px orange;
+}
+
+p {
+  color: rgb(244, 244, 244);
+}
+
+ul {
+  padding-top: 10px;
+}
+
+li {
+  margin: 0 0 3px 0;
+}
+
+.input-div {
+  background-color: #232323;
+  border-radius:10px/90%;
+  border:3px solid orange;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.checkbox-inline {
+  color: orange;
+}
+
+/*input[type="checkbox"],
+input[type="radio"] {
+  border: 1px solid #ccc;
+}*/
+
 }
 .clearfix {
   *zoom: 1;
@@ -911,10 +957,7 @@ button {
     display: block;
     line-height: 20px;
   }
-  input[type="checkbox"],
-  input[type="radio"] {
-    border: 1px solid #ccc;
-  }
+
   .form-horizontal .control-label {
     float: none;
     width: auto;

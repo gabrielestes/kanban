@@ -125,6 +125,7 @@ button,
 input,
 select,
 textarea {
+  transform: skewX(-20deg);
   margin: auto;;
   font-size: 100%;
   vertical-align: middle;;
