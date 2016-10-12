@@ -16,6 +16,8 @@ button {
   font-family: 'Orbitron', sans-serif;
   transform: skew(-20deg);
   margin-top: 10px;
+  border-width: 2px;
+  border-color: orange;
 }
 
 #new-task {

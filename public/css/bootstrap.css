@@ -128,8 +128,8 @@ textarea {
   transform: skewX(-20deg);
   margin: auto;;
   font-size: 100%;
-  vertical-align: middle;;
-  font-family: 'Orbitron';
+  vertical-align: middle;
+  font-family: 'Orbitron', sans-serif;
 }
 
 button,

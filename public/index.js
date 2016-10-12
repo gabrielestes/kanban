@@ -19,32 +19,39 @@ $('#new-task').click(function() {
       status: status,
       priority: priority
     }
-  }).done(function($tasks) {
-    console.log("it works");
+  }).done(function(task) {
+    console.log("it works", task);
+    addTask(task);
+    $('.field').val('');
   });
+
+
 })
-//
+
+function addTask($task) {
+  $('#all-tasks').append(
+    "<li class='list-group-item'>" + "<label class='checkbox-inline'><input type='checkbox' value='" + $task.id + "'></label>" + $task.title + " | " + $task.status + " | " + $task.priority + "</li>"
+  );
+}
+
+
 
 $.ajax({
         method: 'GET',
         url: '/api/tasks',
         data: {},
         dataType: 'json'
-      }).done(function($tasks) {
-        console.log($tasks);
+      }).done(function(tasks) {
+        console.log(tasks);
 
-        $tasks.forEach(function($task) {
-          console.log($task);
+        tasks.forEach(function(task) {
+          console.log(task);
 
-          $('#all-tasks').append(
-            "<li class='list-group-item'>" + "<label class='checkbox-inline'><input type='checkbox' value='" + $task.id + "'></label>" + $task.title + " " + $task.status + $task.priority + "</li>"
-          );
+          addTask(task)
         });
       }).fail(function(xhr, text, error) {
         console.error('failed to get tasks: ' + text + ', ' + error);
       });
-
-// setInterval("appendLines()", 3000);
 
 $('#delete-task').on("click",function(){
   var checked = $(".checkbox-inline input[type=checkbox]:checked")
@@ -62,19 +69,3 @@ $('#delete-task').on("click",function(){
             })
   })
 });
-
-
-//
-// function updateTasks($tasks){
-//   $tasks.load('/api/tasks');
-//   console.log("updating")
-// }
-// setInterval( "updateTasks($tasks)", 3000 );
-
-//     var auto_refresh = setInterval(function () {
-//     checked.fadeOut('slow', function() {
-//         $(this).load('/api/tasks', function() {
-//             $(this).fadeIn('slow');
-//         });
-//     });
-// }, 15000);
