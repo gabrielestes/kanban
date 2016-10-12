@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"> -->
   </head>
-  <body class="col">
+  <body>
     <div class="jumbotron text-center">
-      <h1>Gello Task-Basher</h1>
+      <h1>Task Frog</h1>
     </div>
     <div class="container">
       <div class="row row-centered">
@@ -31,9 +32,12 @@
           </p>
           <input type="text" id="priority"/>
         </div>
-        <ul id="all-tasks" class="col-xs-4">
-
-        </ul>
+        <div class="col-xs-4">
+          <ul id="all-tasks" class="list-group">
+          </ul>
+          <button id="edit-task">Edit</button>
+          <button id="delete-task">Delete</button>
+        </div>
         <div class="col-xs-4 col-centered">
           <button id="new-task">New Bulletin</button>
         </div>

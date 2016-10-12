@@ -8,6 +8,11 @@
  * Designed and built with all the love in the world by @mdo and @fat.
  */
 body {
+  font-family: 'Orbitron', sans-serif;
+}
+
+button {
+  font-family: 'Orbitron', sans-serif;
 }
 .clearfix {
   *zoom: 1;

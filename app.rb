@@ -70,15 +70,14 @@ put '/api/tasks/:id' do
 end
 
 # DELETE TASK
-delete '/api/tasks/:id' do
-  task = Task.where(id: params['id'])
-  if task.destroy
+delete '/api/tasks/:id' do |id|
+  if Task.delete(id) == 1
     status 200
-    json 'This task has been removed successfully.'
   else
-    status 500
-    json 'Task removal rejected.'
+    status 404
   end
+
+  {}.to_json
 end
 
 # ALL BULLETINS

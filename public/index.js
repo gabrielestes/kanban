@@ -24,21 +24,56 @@ $('#new-task').click(function() {
   });
 })
 //
-$.ajax({
-        method: 'GET',
-        url: '/api/tasks',
-        data: {
-          // title: title
-        },
-        dataType: 'json'
-      }).done(function($tasks) {
-        console.log($tasks);
+function appendLines(){
+  $.ajax({
+          method: 'GET',
+          url: '/api/tasks',
+          data: {},
+          dataType: 'json'
+        }).done(function($tasks) {
+          console.log($tasks);
 
-        $tasks.forEach(function($task) {
-          console.log($task);
+          $tasks.forEach(function($task) {
+            console.log($task);
 
-          $('#all-tasks').append("<li>" + $task.title + " " + $task.status + $task.priority + "</li>");
+            $('#all-tasks').append("<li class='list-group-item'>"
+              + $task.title + " " + $task.status + $task.priority + "<label class='checkbox-inline'><input type='checkbox' value='" + $task.id + "'></label>" + "</li>"
+            );
+          });
+        }).fail(function(xhr, text, error) {
+          console.error('failed to get tasks: ' + text + ', ' + error);
         });
-      }).fail(function(xhr, text, error) {
-        console.error('failed to get tasks: ' + text + ', ' + error);
-      });
+}
+
+appendLines();
+
+$('#delete-task').on("click",function(){
+  var checked = $(".checkbox-inline input[type=checkbox]:checked")
+
+  checked.each(function(i, elem) {
+    var id = $(elem).val();
+
+    $.ajax({
+              method: 'DELETE',
+              url: '/api/tasks/' + id
+            }).done(function(){
+              console.log("Deleted task")
+            }).fail(function(xhr, text, status) {
+              console.error('An error occurred while deleting a task', text, status)
+            })
+  })
+});
+// 
+// function updateTasks($tasks){
+//   $tasks.load('/api/tasks');
+//   console.log("updating")
+// }
+// setInterval( "updateTasks($tasks)", 3000 );
+
+//     var auto_refresh = setInterval(function () {
+//     checked.fadeOut('slow', function() {
+//         $(this).load('/api/tasks', function() {
+//             $(this).fadeIn('slow');
+//         });
+//     });
+// }, 15000);
